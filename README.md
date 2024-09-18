@@ -67,5 +67,21 @@ Start the application:
 streamlit run app.py
 
 ```
+### 4. 🤝 **Contributing**
+
+If you have suggestions for improvements or want to contribute to **NivrritiMarg**, we’d love to hear from you! 
+
+Feel free to submit issues or pull requests with your ideas or enhancements. Your contributions can help make this project even better.
+
+### How to Contribute
+
+1. **Fork the Repository**: Create your own copy of the repository by clicking the "Fork" button.
+2. **Create a Branch**: Create a new branch for your changes.
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+
+--
+### Thankyou for visiting
 
 
