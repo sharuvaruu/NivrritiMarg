@@ -44,8 +44,28 @@ The project is powered by the following technologies:
 
 ## 🚀 **Getting Started**
 
-### 1. **Clone the Repository**
+### 1. 🛠️ **Clone the Repository**
 
 ```bash
 git clone https://github.com/sharuvaruu/NivrritiMarg.git
 cd NivrritiMarg
+```
+
+### 2. 📦 **Install Dependencies**
+
+Make sure to install the required libraries:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. ▶️ **Run the Application**
+
+Start the application:
+
+```bash
+streamlit run app.py
+
+```
+
+
