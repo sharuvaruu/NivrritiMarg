@@ -18,11 +18,15 @@ NivrritiMarg provides users with personalized investment allocation plans by ana
 The project is powered by the following technologies:
 
 - **Python** 🐍: Core programming language for the backend.
+- **Flask** 🧩: Backend framework for building the server and API.
 - **Streamlit** 📱: Frontend UI for user interaction.
+- **CSS** 🎨: Styling the user interface for a polished look.
+- **HTML** 🌐: Structuring the web content.
 - **yfinance** 📊: Fetching historical stock data.
 - **Keras** 🧠: For building and training the LSTM models.
 - **Pandas & NumPy** 📈: Data handling and processing.
 - **MinMaxScaler**: Data normalization for LSTM model input.
+
 
 ### 📋 **How to Use**
 
