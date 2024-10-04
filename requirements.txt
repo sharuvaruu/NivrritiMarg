@@ -262,9 +262,4 @@ xgboost==2.0.3
 yarl==1.9.2
 yfinance==0.2.40
 Flask
-flask-cors
-requests
-# Add your other dependencies here
 
-# Add this line to specify the start command
-start: python app.py
