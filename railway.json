@@ -1,0 +1,21 @@
+{
+    "services": [
+      {
+        "name": "flask-backend",
+        "env": {
+          "PORT": "5000"
+        },
+        "buildCommand": "pip install -r requirements.txt",
+        "startCommand": "python server.py"
+      },
+      {
+        "name": "streamlit-frontend",
+        "env": {
+          "PORT": "3000"
+        },
+        "buildCommand": "pip install -r requirements.txt",
+        "startCommand": "streamlit run app.py --server.port 3000 --server.headless true"
+      }
+    ]
+  }
+  
