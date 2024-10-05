@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import os
 from sklearn.preprocessing import MinMaxScaler
-from keras.models import Sequential
-from keras.layers import LSTM, Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,LSTM
 import joblib
 from typing import List, Dict
 from concurrent.futures import ThreadPoolExecutor, as_completed
