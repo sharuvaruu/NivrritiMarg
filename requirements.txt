@@ -261,5 +261,4 @@ wrapt==1.14.1
 xgboost==2.0.3
 yarl==1.9.2
 yfinance==0.2.40
-Flask
-
+gunicorn==20.1.0 
