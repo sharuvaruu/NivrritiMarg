@@ -1,12 +1,12 @@
 # Core Dependencies
 Flask>=2.0.0
 Flask-Cors>=5.0.0
-gunicorn>=20.1.0
+gunicorn>=20.1.0  # WSGI HTTP server for UNIX
 Werkzeug>=2.0.0
 
 # Data Handling
 pandas>=1.3.0
-numpy>=1.21.0,<1.22.0
+numpy>=1.21.0,<1.22.0  # Specify compatible range
 requests>=2.25.0
 yfinance>=0.1.63
 
@@ -21,14 +21,12 @@ aiohttp>=3.8.5
 anyio>=3.0.0
 
 # Other Dependencies
-python-dotenv>=1.0.0
-python-json-logger>=2.0.0
+python-dotenv>=1.0.0  # For environment variable management
+python-json-logger>=2.0.0  # For structured logging
 
 # Conditional Dependencies for Windows (Optional)
-pywin32==306; sys_platform == 'win32'
-
-# Remove or Comment Out Windows-Specific Packages
-# pywin32==306
+# Uncomment the following lines if running on Windows
+# pywin32==306; sys_platform == 'win32'
 # pywinpty==2.0.12
 
 # Ensure Compatibility with Python Versions
