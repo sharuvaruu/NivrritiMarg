@@ -29,6 +29,10 @@ def process_investment_strategy(data, result_queue):
         
         logging.info("Fetching stock data")
         df_stocks = fetch_stock_data(investment_tickers)
+        if df_stocks.empty:
+            result_queue.put({'error': 'Failed to fetch stock data. Please try again later.'})
+            return
+
         logging.info("Calculating investment strategy")
         investment_strategy = suggest_investment(df_stocks, years_to_invest, desired_retirement_fund, monthly_investment, risk_category)
         
@@ -47,7 +51,7 @@ def investment_strategy():
     thread = Thread(target=process_investment_strategy, args=(data, result_queue))
     thread.start()
     
-    # Return immediately with a job ID (you can implement a proper job ID system)
+    # Return immediately with a job ID
     return jsonify({'status': 'processing', 'job_id': '12345'})
 
 @app.route('/check-status/<job_id>', methods=['GET'])

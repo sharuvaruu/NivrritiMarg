@@ -2,12 +2,12 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 import os
+import joblib
+from typing import Optional, Dict, Union, List
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,LSTM
-import joblib
-from typing import List, Dict
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from tensorflow.keras.layers import Dense, LSTM
 
 # List of Indian stock tickers, mutual funds, gold ETFs, and bonds
 investment_tickers = [
@@ -36,12 +36,12 @@ def create_lstm_model(input_shape: tuple) -> Sequential:
     model.compile(optimizer='adam', loss='mean_squared_error')
     return model
 
-def process_ticker(ticker: str) -> Dict:
+def process_ticker(ticker: str) -> Optional[Dict[str, Union[str, float]]]:
     try:
         stock = yf.Ticker(ticker)
         hist = stock.history(period="5y")
         if hist.empty:
-            return None
+            return {}
 
         model_path = os.path.join(model_dir, f"{ticker}_lstm.pkl")
         scaler_path = os.path.join(model_dir, f"{ticker}_scaler.pkl")
@@ -51,7 +51,7 @@ def process_ticker(ticker: str) -> Dict:
             scaler = joblib.load(scaler_path)
         else:
             data = hist[['Close']].values
-            scaler = MinMaxScaler(feature_range=(0,1))
+            scaler = MinMaxScaler(feature_range=(0, 1))
             data_scaled = scaler.fit_transform(data)
             X_train, y_train = [], []
             for i in range(60, len(data_scaled)):
@@ -71,7 +71,7 @@ def process_ticker(ticker: str) -> Dict:
         X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
         predicted_stock_price = model.predict(X_test)
         predicted_stock_price = scaler.inverse_transform(predicted_stock_price)
-        
+
         hist['Predicted'] = np.nan
         hist.iloc[60:, hist.columns.get_loc('Predicted')] = predicted_stock_price.flatten()
 
@@ -91,12 +91,17 @@ def process_ticker(ticker: str) -> Dict:
         }
     except Exception as e:
         print(f"Error processing ticker {ticker}: {e}")
-        return None
+        return {}
 
 def fetch_stock_data(tickers: List[str]) -> pd.DataFrame:
     with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(process_ticker, ticker) for ticker in tickers]
-        stock_data = [future.result() for future in as_completed(futures) if future.result()]
+        futures = {executor.submit(process_ticker, ticker): ticker for ticker in tickers}
+        stock_data = []
+        for future in as_completed(futures):
+            result = future.result()
+            if result:
+                stock_data.append(result)
+
     return pd.DataFrame(stock_data)
 
 def suggest_investment(df: pd.DataFrame, years: int, target_fund: float, monthly_investment: float, risk_category: str) -> Dict:
@@ -107,7 +112,10 @@ def suggest_investment(df: pd.DataFrame, years: int, target_fund: float, monthly
         "medium": df['Risk Profile'].isin(['Medium', 'High']),
         "low": df['Risk Profile'].isin(['Low', 'Medium', 'High'])
     }
-    df = df[risk_filters.get(risk_category.lower(), True)]
+    filtered_df = df[risk_filters.get(risk_category.lower(), True)]
+    
+    # Ensure the result is a DataFrame
+    df = filtered_df if isinstance(filtered_df, pd.DataFrame) else pd.DataFrame(columns=df.columns)
 
     if df.empty:
         return {"error": "No investments match the specified risk category"}
@@ -126,26 +134,12 @@ def suggest_investment(df: pd.DataFrame, years: int, target_fund: float, monthly
     sim_returns = np.cumprod(1 + sim_returns, axis=1)
     sim_final_values = monthly_investment * sim_returns.sum(axis=1)
 
-    total_invested = monthly_investment * 12 * years
-    mean_final_value = np.mean(sim_final_values)
-    std_dev_final_value = np.std(sim_final_values)
-
-    risk_estimate = {
-        'mean': mean_final_value,
-        'std_dev': std_dev_final_value,
-        'confidence_interval': (np.percentile(sim_final_values, 5), np.percentile(sim_final_values, 95))
-    }
+    total_invested = monthly_investment * years * 12
+    total_return = sim_final_values.mean() - total_invested
 
     return {
-        'allocations': df[['Stock Name', 'Allocation']].values.tolist(),
-        'total_future_value': mean_final_value,
-        'average_annual_return_percentage': portfolio_return,
-        'total_invested': total_invested,
-        'risk_estimate': risk_estimate
+        "Investment Allocation": df[['Stock Name', 'Allocation']],
+        "Expected Portfolio Return": portfolio_return,
+        "Expected Portfolio Volatility": portfolio_volatility,
+        "Total Investment Return": total_return
     }
-
-# Example usage
-if __name__ == "__main__":
-    stock_data = fetch_stock_data(investment_tickers)
-    result = suggest_investment(stock_data, years=10, target_fund=1000000, monthly_investment=10000, risk_category="medium")
-    print(result)
