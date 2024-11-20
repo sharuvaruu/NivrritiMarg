@@ -9,6 +9,7 @@ NivrritiMarg provides users with **personalized investment allocation plans** by
 The model predicts future trends using **LSTM-based deep learning techniques** and assists in making **informed investment decisions** based on user-defined inputs.  
 
 ---
+![image](https://github.com/user-attachments/assets/dd7b48ee-f090-4706-a584-1b3482f037a2)
 
 ## 📊 Key Features  
 
@@ -42,7 +43,10 @@ The model predicts future trends using **LSTM-based deep learning techniques** a
 4. **Risk Tolerance**:  
    - **Conservative**: Lower risk, stable returns.  
    - **Moderate**: Balanced risk and returns.  
-   - **Aggressive**: Higher risk, potential higher returns.  
+   - **Aggressive**: Higher risk, potential higher returns.
+  
+![image](https://github.com/user-attachments/assets/6e9fa9e2-232e-4b93-9f9c-cfcd2c94a945)
+
 
 ---
 
