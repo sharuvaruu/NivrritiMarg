@@ -80,7 +80,7 @@ pip install -r requirements.txt
 Start the application:
 
 ```bash
-streamlit run app.py
+flask run
 
 ```
 ### 4. 🤝 **Contributing**
