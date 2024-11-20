@@ -1,48 +1,56 @@
-# 📈 **NivrritiMarg** - AI-Powered Retirement Investment Allocation Platform 🚀
+# 📈 NivrritiMarg - AI-Powered Retirement Investment Allocation Platform 🚀
 
-Welcome to **NivrritiMarg**, your go-to AI engine for simplifying retirement planning. By using historical stock, mutual fund, and bond data, our platform generates an optimal investment strategy tailored to your financial goals and risk preferences. 🌟
+Welcome to **NivrritiMarg**, your go-to AI engine for simplifying retirement planning. Using historical data on stocks, mutual funds, and bonds, our platform generates an optimal investment strategy tailored to your financial goals and risk preferences. 🌟
 
-## 🔍 **Project Overview**
+---
 
-NivrritiMarg provides users with personalized investment allocation plans by analyzing five years of historical financial data from various Indian stocks, mutual funds, and other asset classes. The model predicts future trends using LSTM-based deep learning techniques and assists in making informed investment decisions based on user-defined inputs.
+## 🔍 Project Overview  
+NivrritiMarg provides users with **personalized investment allocation plans** by analyzing five years of historical financial data from various Indian stocks, mutual funds, and other asset classes.  
+The model predicts future trends using **LSTM-based deep learning techniques** and assists in making **informed investment decisions** based on user-defined inputs.  
 
-### 📊 **Key Features**
+---
 
-- **Deep Learning (LSTM) for Stock Prediction**: Our system utilizes LSTM models to predict future stock prices based on historical data.
-- **Risk Profiling**: Tailor your portfolio based on low, medium, or high-risk preferences.
-- **Future Value Prediction**: Predict future value based on monthly investments, risk categories, and desired retirement goals.
-- **Sharpe Ratio & Volatility Analysis**: Understand the risk-return trade-off for each investment.
+## 📊 Key Features  
 
-### 💼 **Tech Stack**
+- **Deep Learning (LSTM) for Stock Prediction**: Predicts future stock prices using historical data.  
+- **Risk Profiling**: Offers conservative, moderate, and aggressive risk tolerance options.  
+- **Future Value Prediction**: Estimates future portfolio value based on monthly contributions and risk preferences.  
+- **Visualization with Chart.js**: Visualizes allocation strategies, historical trends, and future projections.  
+- **Sharpe Ratio & Volatility Analysis**: Helps users assess risk-return trade-offs.  
 
-The project is powered by the following technologies:
+---
 
-- **Python** 🐍: Core programming language for the backend.
-- **Flask** 🧩: Backend framework for building the server and API.
-- **Streamlit** 📱: Frontend UI for user interaction.
-- **CSS** 🎨: Styling the user interface for a polished look.
-- **HTML** 🌐: Structuring the web content.
-- **yfinance** 📊: Fetching historical stock data.
-- **Keras** 🧠: For building and training the LSTM models.
-- **Pandas & NumPy** 📈: Data handling and processing.
-- **MinMaxScaler**: Data normalization for LSTM model input.
+## 🧰 Tech Stack  
 
+- **Python 🐍**: Backend programming.  
+- **Flask 🧩**: Backend framework for building the server and APIs.  
+- **TypeScript 🖋️**: Ensures type safety and improved development on the frontend.  
+- **Chart.js 📊**: For interactive and insightful visualizations.  
+- **CSS 🎨 & HTML 🌐**: Styling and structuring the web interface.  
+- **yfinance 📈**: Fetches historical stock data.  
+- **Keras 🧠**: Builds and trains the LSTM models.  
+- **Pandas & NumPy**: Data manipulation and processing.  
 
-### 📋 **How to Use**
+---
 
-#### Input Parameters:
+## 📋 How to Use  
 
-- **Current Age**: The user's current age.
-- **Retirement Age**: The desired retirement age.
-- **Monthly Investment**: Amount of money the user is willing to invest monthly.
-- **Target Retirement Fund**: The amount of money the user wants to have saved by retirement.
-- **Risk Category**: Low, medium, or high risk preference for investment.
+### Input Parameters:  
+1. **Current Age**: Your current age.  
+2. **Retirement Age**: Desired age to retire.  
+3. **Monthly Investment (₹)**: Amount you’re willing to invest every month.  
+4. **Risk Tolerance**:  
+   - **Conservative**: Lower risk, stable returns.  
+   - **Moderate**: Balanced risk and returns.  
+   - **Aggressive**: Higher risk, potential higher returns.  
 
-#### Suggested Investment Plan:
+---
 
-- **Allocation**: The app suggests an allocation of stocks, mutual funds, and bonds based on the risk profile.
-- **Future Value**: It estimates the future value of the investment based on monthly contributions and market growth.
-- **Risk Estimate**: The system provides a risk estimate, which includes confidence intervals and projected returns.
+### Suggested Outputs:  
+
+- **Allocation Plan**: Tailored investment in stocks, mutual funds, and bonds based on risk profile.  
+- **Future Value Projection**: Estimated value at retirement based on monthly investments.  
+- **Risk Estimate**: Includes confidence intervals and projected returns.  
 
 ---
 
